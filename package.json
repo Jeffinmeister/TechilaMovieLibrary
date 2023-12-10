@@ -10,6 +10,7 @@
     "netlify-build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src"
   },
   "dependencies": {
+    "aws-sdk": "^2.1515.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
