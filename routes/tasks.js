@@ -151,7 +151,7 @@ router.put('/:task_id', authenticateToken, async function (req, res, next) {
 })
 
 // delete task
-router.put('/:task_id', authenticateToken, async function (req, res, next) {
+router.delete('/:task_id', authenticateToken, async function (req, res, next) {
   try {
     const { task_id } = req.params;
     const user = req.user
