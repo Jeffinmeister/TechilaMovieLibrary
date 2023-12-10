@@ -1,0 +1,24 @@
+const express = require('express');
+const path = require('path');
+require('dotenv').config()
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const userRouter = require('./routes/users');
+const taskRouter = require('./routes/tasks');
+
+const app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DB}/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+app.use('/user/', userRouter);
+app.use('/tasks/', taskRouter);
+
+module.exports = app;
