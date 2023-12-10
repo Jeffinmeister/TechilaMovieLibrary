@@ -6,8 +6,8 @@ require('dotenv').config()
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const userRouter = require('../routes/users');
-const taskRouter = require('../routes/tasks');
+const userRouter = require('./routes/users');
+const taskRouter = require('./routes/tasks');
 
 const app = express();
 
