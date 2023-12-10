@@ -150,4 +150,36 @@ router.put('/:task_id', authenticateToken, async function (req, res, next) {
   }
 })
 
+// delete task
+router.put('/:task_id', authenticateToken, async function (req, res, next) {
+  try {
+    const { task_id } = req.params;
+    const user = req.user
+
+
+    if (!task_id) {
+      throw Error('Task Id required')
+
+    }
+
+    const taskData = await Task.findOne({ _id: ObjectId(task_id), user_id: user.user_id })
+    if (!taskData) {
+      throw Error('No tasks found')
+    }
+
+
+    const updateTask = await Task.remove({user_id:user.user_id,_id: ObjectId(task_id)})
+
+
+    console.log(updateTask, 'updateTask dataa')
+    res.status(204).json({ data: updateTask, message: "Task removed successfully" })
+
+
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: error?.message || 'Internal Server Error' })
+  }
+})
+
 module.exports = router
